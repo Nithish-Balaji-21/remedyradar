@@ -7,10 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Layout from "@/components/layout/Layout";
 import { getAllMedicines, getCategories } from "@/data/db";
 import { useCart, Medicine } from "@/hooks/use-cart";
+import { useAuth } from "@/hooks/use-auth";
 
 const Medicines = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { addItem } = useCart();
+  const { user, isLoggedIn } = useAuth();
   
   const medicines = getAllMedicines();
   const categories = getCategories();
@@ -21,6 +23,21 @@ const Medicines = () => {
         medicine.description.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : medicines;
+  
+  // Get personalized recommendations based on user's medical history
+  const getPersonalizedRecommendations = (): Medicine[] => {
+    if (!isLoggedIn || !user?.medicalHistory?.length) return [];
+    
+    // Simple recommendation algorithm based on medical history keywords
+    return medicines.filter(medicine => {
+      return user.medicalHistory?.some(condition => 
+        medicine.description.toLowerCase().includes(condition.toLowerCase()) ||
+        medicine.name.toLowerCase().includes(condition.toLowerCase())
+      );
+    });
+  };
+  
+  const personalizedRecommendations = getPersonalizedRecommendations();
   
   const handleAddToCart = (medicine: Medicine) => {
     addItem(medicine);
@@ -35,6 +52,42 @@ const Medicines = () => {
             Browse our range of over-the-counter medicines.
           </p>
         </div>
+        
+        {isLoggedIn && personalizedRecommendations.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4 text-medical-600">
+              Recommended for You
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {personalizedRecommendations.map(medicine => (
+                <div 
+                  key={medicine.id} 
+                  className="bg-white rounded-lg overflow-hidden border border-medical-100 transition-shadow hover:shadow-md"
+                >
+                  <div className="h-40 bg-medical-50 p-4 flex items-center justify-center">
+                    <img 
+                      src={medicine.image} 
+                      alt={medicine.name}
+                      className="h-full object-contain"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="bg-medical-100 text-medical-800 text-xs font-semibold inline-block px-2 py-1 rounded mb-2">
+                      Recommended
+                    </div>
+                    <h3 className="font-medium text-lg mb-1">{medicine.name}</h3>
+                    <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
+                    <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-medical-600">${medicine.price.toFixed(2)}</span>
+                      <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="relative flex-grow">

@@ -1,13 +1,15 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X, User, Home, Pill, MessageSquare } from "lucide-react";
+import { ShoppingCart, Menu, X, User, Home, Pill, MessageSquare, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
+import { useAuth } from "@/hooks/use-auth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { items } = useCart();
+  const { user, isLoggedIn, logout } = useAuth();
   
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -15,8 +17,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <span className="text-medical-600 font-bold text-xl">HealNow</span>
-              <span className="text-gray-600 ml-1 font-medium text-xl">MedsDirect</span>
+              <span className="text-medical-600 font-bold text-xl">REMEDY</span>
+              <span className="text-gray-600 ml-1 font-medium text-xl">RADAR</span>
             </Link>
           </div>
           
@@ -38,10 +40,29 @@ const Navbar = () => {
               <MessageSquare className="h-4 w-4 mr-1" />
               Chat with Doctor
             </Link>
-            <Link to="/profile" className="text-gray-600 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-              <User className="h-4 w-4 mr-1" />
-              Profile
-            </Link>
+            
+            {isLoggedIn ? (
+              <>
+                <Link to="/profile" className="text-gray-600 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                  <User className="h-4 w-4 mr-1" />
+                  {user?.role === 'admin' ? 'Admin Dashboard' : 'Profile'}
+                </Link>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={logout}
+                  className="text-gray-600 hover:text-medical-600"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Link to="/login" className="text-gray-600 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                <LogIn className="h-4 w-4 mr-1" />
+                Login
+              </Link>
+            )}
+            
             <Link to="/cart" className="relative text-gray-600 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <ShoppingCart className="h-4 w-4 mr-1" />
               Cart
@@ -107,13 +128,34 @@ const Navbar = () => {
             >
               Chat with Doctor
             </Link>
-            <Link 
-              to="/profile" 
-              className="text-gray-600 hover:text-medical-600 block px-3 py-2 rounded-md text-base font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Profile
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link 
+                  to="/profile" 
+                  className="text-gray-600 hover:text-medical-600 block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {user?.role === 'admin' ? 'Admin Dashboard' : 'Profile'}
+                </Link>
+                <button 
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-gray-600 hover:text-medical-600 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link 
+                to="/login" 
+                className="text-gray-600 hover:text-medical-600 block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       )}
