@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import Layout from "@/components/layout/Layout";
-import { getAllSymptoms, getMedicinesBySymptomId, Medicine } from "@/data/db";
-import { useCart } from "@/hooks/use-cart";
+import { getAllSymptoms, getMedicinesBySymptomId } from "@/data/db";
+import { useCart, Medicine } from "@/hooks/use-cart";
 
 const Symptoms = () => {
   const navigate = useNavigate();

@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Layout from "@/components/layout/Layout";
-import { getAllMedicines, getCategories, Medicine } from "@/data/db";
-import { useCart } from "@/hooks/use-cart";
+import { getAllMedicines, getCategories } from "@/data/db";
+import { useCart, Medicine } from "@/hooks/use-cart";
 
 const Medicines = () => {
   const [searchTerm, setSearchTerm] = useState("");
