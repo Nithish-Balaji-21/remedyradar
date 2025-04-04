@@ -6,7 +6,7 @@ export type Medicine = {
   id: string;
   name: string;
   description: string;
-  price: number;
+  price: number; // Price in INR now
   image: string;
   dosage: string;
   category: string;

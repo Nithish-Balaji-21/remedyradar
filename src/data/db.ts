@@ -32,13 +32,13 @@ export type ChatMessage = {
   timestamp: number;
 };
 
-// Mock medicines database
+// Mock medicines database with prices in INR
 export const medicines: Medicine[] = [
   {
     id: "m1",
     name: "Paracetamol",
     description: "Relief from fever and mild to moderate pain.",
-    price: 5.99,
+    price: 249.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "500mg",
     category: "pain-relief"
@@ -47,7 +47,7 @@ export const medicines: Medicine[] = [
     id: "m2",
     name: "Ibuprofen",
     description: "Non-steroidal anti-inflammatory drug used to treat pain and inflammation.",
-    price: 7.99,
+    price: 349.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "200mg",
     category: "pain-relief"
@@ -56,7 +56,7 @@ export const medicines: Medicine[] = [
     id: "m3",
     name: "Cetirizine",
     description: "Antihistamine used to relieve allergy symptoms.",
-    price: 8.50,
+    price: 399.50, // Price in INR
     image: "/placeholder.svg",
     dosage: "10mg",
     category: "allergy"
@@ -65,7 +65,7 @@ export const medicines: Medicine[] = [
     id: "m4",
     name: "Omeprazole",
     description: "Reduces stomach acid production to treat indigestion and heartburn.",
-    price: 12.99,
+    price: 599.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "20mg",
     category: "digestive-health"
@@ -74,7 +74,7 @@ export const medicines: Medicine[] = [
     id: "m5",
     name: "Azithromycin",
     description: "Antibiotic used to treat a variety of bacterial infections.",
-    price: 15.99,
+    price: 749.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "250mg",
     category: "antibiotics"
@@ -83,7 +83,7 @@ export const medicines: Medicine[] = [
     id: "m6",
     name: "Loratadine",
     description: "Non-drowsy antihistamine for allergy relief.",
-    price: 9.99,
+    price: 449.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "10mg",
     category: "allergy"
@@ -92,7 +92,7 @@ export const medicines: Medicine[] = [
     id: "m7",
     name: "Amoxicillin",
     description: "Antibiotic used to treat bacterial infections.",
-    price: 13.99,
+    price: 649.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "500mg",
     category: "antibiotics"
@@ -101,7 +101,7 @@ export const medicines: Medicine[] = [
     id: "m8",
     name: "Loperamide",
     description: "Anti-diarrheal medication.",
-    price: 6.99,
+    price: 299.99, // Price in INR
     image: "/placeholder.svg",
     dosage: "2mg",
     category: "digestive-health"

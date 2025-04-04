@@ -43,6 +43,11 @@ const Medicines = () => {
     addItem(medicine);
   };
   
+  // Format price in Indian Rupees
+  const formatPrice = (price: number) => {
+    return `₹${price.toFixed(2)}`;
+  };
+  
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -79,7 +84,7 @@ const Medicines = () => {
                     <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                     <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-medical-600">${medicine.price.toFixed(2)}</span>
+                      <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
                       <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                     </div>
                   </div>
@@ -134,7 +139,7 @@ const Medicines = () => {
                     <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                     <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-medical-600">${medicine.price.toFixed(2)}</span>
+                      <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
                       <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                     </div>
                   </div>
@@ -171,7 +176,7 @@ const Medicines = () => {
                         <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                         <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-medical-600">${medicine.price.toFixed(2)}</span>
+                          <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
                           <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                         </div>
                       </div>

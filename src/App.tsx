@@ -15,6 +15,9 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
+// Set application title
+document.title = "REMEDY RADAR";
+
 const queryClient = new QueryClient();
 
 const App = () => (

@@ -47,6 +47,11 @@ const Cart = () => {
     setAddress("");
   };
   
+  // Function to format price in Indian Rupees
+  const formatPrice = (price: number) => {
+    return `₹${price.toFixed(2)}`;
+  };
+  
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -82,7 +87,7 @@ const Cart = () => {
                           <h3 className="font-medium">{item.medicine.name}</h3>
                           <p className="text-sm text-gray-600">{item.medicine.dosage}</p>
                           <p className="font-medium text-medical-600 mt-1">
-                            ${item.medicine.price.toFixed(2)}
+                            {formatPrice(item.medicine.price)}
                           </p>
                         </div>
                         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
@@ -127,15 +132,15 @@ const Cart = () => {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Subtotal</span>
-                      <span>${getTotalPrice().toFixed(2)}</span>
+                      <span>{formatPrice(getTotalPrice())}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Delivery Fee</span>
-                      <span>$2.99</span>
+                      <span>₹49.00</span>
                     </div>
                     <div className="border-t border-gray-200 pt-4 flex justify-between font-semibold">
                       <span>Total</span>
-                      <span>${(getTotalPrice() + 2.99).toFixed(2)}</span>
+                      <span>{formatPrice(getTotalPrice() + 49.00)}</span>
                     </div>
                     
                     <div className="pt-4">
