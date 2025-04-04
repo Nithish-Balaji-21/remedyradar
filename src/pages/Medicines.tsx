@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Layout from "@/components/layout/Layout";
 import { getAllMedicines, getCategories } from "@/data/db";
-import { useCart, Medicine } from "@/hooks/use-cart";
+import { useCart, Medicine, formatIndianPrice } from "@/hooks/use-cart";
 import { useAuth } from "@/hooks/use-auth";
 
 const Medicines = () => {
@@ -41,11 +41,6 @@ const Medicines = () => {
   
   const handleAddToCart = (medicine: Medicine) => {
     addItem(medicine);
-  };
-  
-  // Format price in Indian Rupees
-  const formatPrice = (price: number) => {
-    return `₹${price.toFixed(2)}`;
   };
   
   return (
@@ -84,7 +79,7 @@ const Medicines = () => {
                     <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                     <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
+                      <span className="font-bold text-medical-600">{formatIndianPrice(medicine.price)}</span>
                       <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                     </div>
                   </div>
@@ -139,7 +134,7 @@ const Medicines = () => {
                     <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                     <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
+                      <span className="font-bold text-medical-600">{formatIndianPrice(medicine.price)}</span>
                       <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                     </div>
                   </div>
@@ -176,7 +171,7 @@ const Medicines = () => {
                         <p className="text-sm text-gray-600 mb-2">{medicine.description}</p>
                         <p className="text-sm text-gray-600 mb-4">Dosage: {medicine.dosage}</p>
                         <div className="flex justify-between items-center">
-                          <span className="font-bold text-medical-600">{formatPrice(medicine.price)}</span>
+                          <span className="font-bold text-medical-600">{formatIndianPrice(medicine.price)}</span>
                           <Button onClick={() => handleAddToCart(medicine)}>Add to Cart</Button>
                         </div>
                       </div>

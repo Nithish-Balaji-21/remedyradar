@@ -6,7 +6,7 @@ export type Medicine = {
   id: string;
   name: string;
   description: string;
-  price: number; // Price in INR now
+  price: number; // Price in INR
   image: string;
   dosage: string;
   category: string;
@@ -24,9 +24,15 @@ type CartContextType = {
   updateQuantity: (medicineId: string, quantity: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
+  formatPrice: (price: number) => string; // Added formatPrice utility function
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
+
+// Utility function to format price in Indian Rupees
+export const formatIndianPrice = (price: number): string => {
+  return `₹${price.toFixed(2)}`;
+};
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -94,6 +100,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return items.reduce((total, item) => total + (item.medicine.price * item.quantity), 0);
   };
 
+  // Format price in Indian Rupees
+  const formatPrice = (price: number) => {
+    return formatIndianPrice(price);
+  };
+
   return (
     <CartContext.Provider 
       value={{ 
@@ -102,7 +113,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeItem, 
         updateQuantity,
         clearCart,
-        getTotalPrice
+        getTotalPrice,
+        formatPrice
       }}
     >
       {children}

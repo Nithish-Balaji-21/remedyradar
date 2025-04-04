@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Checkbox } from "@/components/ui/checkbox";
 import Layout from "@/components/layout/Layout";
 import { getAllSymptoms, getMedicinesBySymptomId } from "@/data/db";
-import { useCart, Medicine } from "@/hooks/use-cart";
+import { useCart, Medicine, formatIndianPrice } from "@/hooks/use-cart";
 
 const Symptoms = () => {
   const navigate = useNavigate();
@@ -81,7 +81,7 @@ const Symptoms = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {symptoms.map(symptom => (
+                  {getAllSymptoms().map(symptom => (
                     <div key={symptom.id} className="flex items-start space-x-3 rtl:space-x-reverse">
                       <Checkbox 
                         id={symptom.id} 
@@ -156,7 +156,7 @@ const Symptoms = () => {
                             <h3 className="font-medium">{medicine.name}</h3>
                             <p className="text-sm text-gray-600">{medicine.description}</p>
                             <p className="text-sm text-gray-600">Dosage: {medicine.dosage}</p>
-                            <p className="font-medium text-medical-600 mt-1">${medicine.price.toFixed(2)}</p>
+                            <p className="font-medium text-medical-600 mt-1">{formatIndianPrice(medicine.price)}</p>
                           </div>
                         </div>
                         <Button 

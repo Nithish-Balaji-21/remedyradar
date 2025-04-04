@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Search, ShoppingBag, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
+import { formatIndianPrice } from "@/hooks/use-cart";
 
 const Index = () => {
   return (
@@ -110,7 +111,7 @@ const Index = () => {
                   <h3 className="font-semibold text-lg mb-1">Popular Medicine {item}</h3>
                   <p className="text-gray-600 text-sm mb-3">Description of the medicine goes here.</p>
                   <div className="flex justify-between items-center">
-                    <span className="font-bold text-medical-600">$9.99</span>
+                    <span className="font-bold text-medical-600">{formatIndianPrice(299.99)}</span>
                     <Button size="sm">Add to Cart</Button>
                   </div>
                 </div>

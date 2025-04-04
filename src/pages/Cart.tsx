@@ -8,7 +8,7 @@ import { useCart } from "@/hooks/use-cart";
 import { toast } from "@/components/ui/use-toast";
 
 const Cart = () => {
-  const { items, removeItem, updateQuantity, clearCart, getTotalPrice } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, getTotalPrice, formatPrice } = useCart();
   const [address, setAddress] = useState("");
   
   const handleIncreaseQuantity = (medicineId: string, currentQuantity: number) => {
@@ -45,11 +45,6 @@ const Cart = () => {
     
     clearCart();
     setAddress("");
-  };
-  
-  // Function to format price in Indian Rupees
-  const formatPrice = (price: number) => {
-    return `₹${price.toFixed(2)}`;
   };
   
   return (
